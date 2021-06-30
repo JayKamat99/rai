@@ -25,7 +25,7 @@ void tutorialBasics(){
 
   //-- default tasks for transition costs
   komo.add_qControlObjective({}, 2, 1.);
-//  komo.addSquaredQuaternionNorms(-1., -1., 1e1); //when the kinematics includes quaternion joints, keep them roughly regularized
+ // komo.addSquaredQuaternionNorms(-1., -1., 1e1); //when the kinematics includes quaternion joints, keep them roughly regularized
 
   //-- simple tasks, called low-level
 
@@ -33,20 +33,21 @@ void tutorialBasics(){
   komo.addObjective({1.,-1.}, FS_positionDiff, {"endeff", "target"}, OT_eq, {1e0});
 
   //in phase-time [1,\infty] quaternion-difference between "endeff" and "target" shall be zero (eq objective)
-//  komo.addObjective({1., -1.}, FS_quaternionDiff, {"endeff", "target"}, OT_eq, {1e1});
+  // komo.addObjective({1., -1.}, FS_quaternionDiff, {"endeff", "target"}, OT_eq, {1e1});
   //I don't aleays recommend setting quaternion tasks! This is only for testing here. As an alternative, one can use alignment tasks as in test/KOMO/komo
 
   //slow down around phase-time 1. (not measured in seconds, but phase)
-//  komo.setSlow(1., -1., 1e1);
+ komo.setSlow(1., -1., 1e1);
 
   //-- call the optimizer
-//  komo.animateOptimization = 1;
+ komo.animateOptimization = 1;
   komo.optimize();
-    komo.checkGradients(); //this checks all gradients of the problem by finite difference
+    // komo.checkGradients(); //this checks all gradients of the problem by finite difference
   komo.getReport(true); //true -> plot the cost curves
-//  for(uint i=0;i<2;i++) komo.displayTrajectory(.1, true); //play the trajectory
+ // for(uint i=0;i<2;i++) komo.displayTrajectory(.1, true); //play the trajectory
   rai::ConfigurationViewer V;
   V.setConfiguration(komo.pathConfig, "optimized motion", true);
+  while(V.playVideo());
 
   /* next step:
    *
@@ -89,7 +90,7 @@ void tutorialInverseKinematics(){
   komo.setModel(G, false);
 
   //-- the timing parameters: 1 phase, 1 time slice, duration 1, order 1
-  komo.setTiming(1., 1, 1., 1);
+  komo.setTiming(1., 20, 1., 1);
 
   //-- default tasks for transition costs
   komo.add_qControlObjective({}, 1, 1.);
@@ -100,11 +101,11 @@ void tutorialInverseKinematics(){
   komo.addObjective({}, FS_quaternionDiff, {"endeff", "target"}, OT_eq, {1e1});
 
   //-- call the optimizer
-//  komo.animateOptimization = 1;
+ komo.animateOptimization = 1;
   komo.optimize();
-  //  komo.checkGradients(); //this checks all gradients of the problem by finite difference
+   komo.checkGradients(); //this checks all gradients of the problem by finite difference
   komo.getReport(); //true -> plot the cost curves
-//  for(uint i=0;i<2;i++) komo.displayTrajectory(.1, true); //play the trajectory
+  // for(uint i=0;i<2;i++) komo.displayTrajectory(.1, true); //play the trajectory
   rai::ConfigurationViewer V;
   V.setConfiguration(komo.pathConfig, "optimized motion", true);
 }
@@ -114,7 +115,7 @@ void tutorialInverseKinematics(){
 int main(int argc,char** argv){
   rai::initCmdLine(argc,argv);
 
-  tutorialBasics();
+  // tutorialBasics();
 
   tutorialInverseKinematics();
 

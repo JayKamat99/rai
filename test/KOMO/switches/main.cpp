@@ -38,8 +38,8 @@ void TEST(Grasp){
 
   komo.addObjective({2.,-1.}, FS_qItself, {}, OT_eq, {1e1}, {}, 1);
 
-//  komo.animateOptimization = 2;
-//  komo.verbose = 8;
+  komo.animateOptimization = 2;
+  komo.verbose = 8;
   komo.optimize();
   komo.checkGradients();
 
@@ -108,9 +108,9 @@ void testPickAndPlace(bool keyframesOnly){
 int main(int argc,char** argv){
   rai::initCmdLine(argc,argv);
 
-//  testGrasp();
+  // testGrasp();
   testPickAndPlace(false);
-//  testPickAndPlace(true);
+  // testPickAndPlace(true);
 
   return 0;
 }

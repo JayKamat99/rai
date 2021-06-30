@@ -23,15 +23,16 @@ void TEST(Easy){
   komo.addObjective({.98,1.}, FS_qItself, {}, OT_sos, {1e1}, {}, 1);
   komo.addObjective({}, FS_accumulatedCollisions, {}, OT_eq, {1.});
 
-  komo.reportProblem();
+  // komo.reportProblem();
 
 //  komo.setSpline(5);
   komo.optimize();
   cout <<"TIME OPTIM: total=" <<sum(komo.getPath_times()) <<komo.getPath_times() <<endl;
   komo.plotTrajectory();
+
 //  komo.reportProxies();
   komo.checkGradients();
-  for(uint i=0;i<2;i++) komo.displayTrajectory();
+  // for(uint i=0;i<2;i++) komo.displayTrajectory();
 }
 
 //===========================================================================
@@ -184,11 +185,11 @@ void TEST(PR2){
   }
 
   KOMO komo;
-//  komo.logFile = new ofstream("z.dat");
-//  komo.denseOptimization=true;
-//  komo.sparseOptimization=true;
+ // komo.logFile = new ofstream("z.dat");
+ // komo.denseOptimization=true;
+ // komo.sparseOptimization=true;
   komo.setModel(C);
-  komo.setTiming(1., 100, 10., 2);
+  komo.setTiming(2., 50, 10., 2);
   komo.add_qControlObjective({}, 2, 1.);
   komo.addObjective({1.}, FS_positionDiff, {"endeff", "target"}, OT_eq, {1e1});
   komo.addObjective({.98,1.}, FS_qItself, {}, OT_sos, {1e1}, {}, 1);
@@ -197,7 +198,7 @@ void TEST(PR2){
 //  komo.setSpline(10);
   komo.optimize();
   komo.plotTrajectory();
-//  komo.checkGradients();
+ komo.checkGradients();
   rai::ConfigurationViewer V;
   V.setPath(C, komo.x, "result", true);
   while(V.playVideo());
@@ -221,12 +222,12 @@ void TEST(PR2){
 int main(int argc,char** argv){
   rai::initCmdLine(argc,argv);
 
-//  rnd.clockSeed();
+ rnd.clockSeed();
 
-//  testEasy();
-//  testAlign();
-//  testThin();
-  testPR2();
+ // testEasy();
+ // testAlign();
+ // testThin();
+ testPR2();
 
   return 0;
 }
