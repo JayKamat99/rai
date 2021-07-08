@@ -371,9 +371,12 @@ struct GlfwSpinner : Thread {
 
   static void _Close(GLFWwindow* window) {
     OpenGL* gl=(OpenGL*)glfwGetWindowUserPointer(window);
+//    LOG(-1) <<"closing window";
 //      if (!time_to_close)
 //    OpenGL *gl=(OpenGL*)glfwSetWindowShouldClose(window, GLFW_FALSE);
-    gl->WindowStatus(0);
+//    gl->WindowStatus(0);
+    glfwHideWindow(window);
+//    gl->closeWindow();
   }
 
   static void _Scroll(GLFWwindow* window, double xoffset, double yoffset) {
@@ -431,6 +434,8 @@ void OpenGL::openWindow() {
     fg->mutex.unlock();
 
     fg->addGL(this);
+  }else{
+    //glfwShowWindow(self->window);
   }
 }
 
@@ -1713,6 +1718,8 @@ void OpenGL::Draw(int w, int h, rai::Camera* cam, bool callerHasAlreadyLocked) {
   glEnable(GL_BLEND);  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_CULL_FACE);  glFrontFace(GL_CCW);
   glShadeModel(GL_FLAT);  //glShadeModel(GL_SMOOTH);
+
+  if(drawOptions.pclPointSize>0.) glPointSize(drawOptions.pclPointSize);
 
   //select mode?
   GLint mode;

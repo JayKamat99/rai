@@ -2606,6 +2606,11 @@ void SparseMatrix::rowWiseMult(const arr& a) {
   for(uint k=0; k<Z.N; k++) Z.elem(k) *= a.elem(elems.p[2*k]);
 }
 
+void SparseMatrix::rowWiseMult(const floatA& a) {
+  CHECK_EQ(a.N, Z.d0, "");
+  for(uint k=0; k<Z.N; k++) Z.elem(k) *= a.elem(elems.p[2*k]);
+}
+
 //void SparseMatrix::add(const SparseMatrix& a, double coeff) {
 //  CHECK_EQ(a.Z.d0, Z.d0, "");
 //  CHECK_EQ(a.Z.d1, Z.d1, "");
@@ -2700,6 +2705,17 @@ arr SparseMatrix::getTriplets() const{
     T.p[3*k+2] = Z.p[k];
   }
   return T;
+}
+
+void SparseMatrix::checkConsistency() const {
+  CHECK(Z.isSparse(), "")
+  CHECK_EQ(this, Z.special, "");
+  CHECK_EQ(elems.d0, Z.N, "");
+  CHECK_EQ(elems.d1, 2, "");
+  if(cols.N){
+    CHECK_EQ(rows.N, Z.d0, "");
+    CHECK_EQ(cols.N, Z.d1, "");
+  }
 }
 
 } //namespace rai

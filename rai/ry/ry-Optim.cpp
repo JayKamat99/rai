@@ -100,6 +100,11 @@ void init_Optim(pybind11::module& m) {
       .def("get", &OptBench_InvKin_Endeff::get)
       ;
 
+  pybind11::class_<OptBench_Skeleton_Pick, std::shared_ptr<OptBench_Skeleton_Pick>>(m, "OptBench_Skeleton_Pick")
+      .def(pybind11::init<rai::ArgWord>())
+      .def("get", &OptBench_Skeleton_Pick::get)
+      ;
+
   pybind11::class_<OptBench_Skeleton_Handover, std::shared_ptr<OptBench_Skeleton_Handover>>(m, "OptBench_Skeleton_Handover")
       .def(pybind11::init<rai::ArgWord>())
       .def("get", &OptBench_Skeleton_Handover::get)
@@ -153,14 +158,6 @@ void init_Optim(pybind11::module& m) {
   .export_values();
 
 #undef ENUMVAL
-#define ENUMVAL(x) .value(#x, rai::_##x)
-
-  pybind11::enum_<rai::ArgWord>(m, "Arg")
-  ENUMVAL(left)
-  ENUMVAL(right)
-  ENUMVAL(sequence)
-  ENUMVAL(path)
-  .export_values();
 
 }
 
