@@ -82,6 +82,7 @@ void testPickAndPlace(bool keyframesOnly){
     komo.addObjective({.9,1.1}, FS_position, {"gripper"}, OT_eq, {}, {0.,0.,.1}, 2);
   }
 
+
   //place
   komo.addSwitch_stable(2., -1., "gripper", "table", "box", false);
   komo.addObjective({2.}, FS_positionDiff, {"box", "table"}, OT_eq, {1e2}, {0,0,.08}); //arr({1,3},{0,0,1e2})
@@ -92,15 +93,15 @@ void testPickAndPlace(bool keyframesOnly){
     komo.addObjective({2.}, FS_qItself, {}, OT_eq, {}, {}, 1);
     komo.addObjective({1.9,2.1}, FS_position, {"gripper"}, OT_eq, {}, {0.,0.,.1}, 2);
   }
-
+  
   komo.verbose = 4;
   komo.optimize();
 //  komo.checkGradients();
 
   komo.view(true, "optimized motion");
   for(uint i=0;i<2;i++) komo.view_play(true);
-//  V.setPath(komo.getPath_frames(), "optimized motion", true);
-//  for(uint i=0;i<2;i++) V.playVideo(true);
+ // V.setPath(komo.getPath_frames(), "optimized motion", true);
+ // for(uint i=0;i<2;i++) V.playVideo(true);
 }
 
 //===========================================================================
