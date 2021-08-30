@@ -15,7 +15,7 @@ void goToBall(){
   komo.addObjective({}, FS_accumulatedCollisions, {}, OT_eq, {1.});
   komo.add_collision(true);
 
-  komo.animateOptimization = 3;
+  komo.animateOptimization = 1;
   // komo.initWithWaypoints({{1,1},{2,2}} , 2, false); //false-> it's linear interpolation and not sine
   
   // for (int i=0; i<5; ++i){
@@ -79,7 +79,7 @@ void pickAndPlace(bool keyframesOnly){
   }
 
   komo.verbose = 4;
-  komo.animateOptimization=3;
+  komo.animateOptimization=1;
   // komo.initWithWaypoints({{1,1},{2,2},{3,3},{3,3}} , 2, false);
   komo.optimize();
 

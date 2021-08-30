@@ -138,3 +138,5 @@ srv_gen
 *Feedback.msg
 *Goal.msg
 *Result.msg
+
+Doxyfile
