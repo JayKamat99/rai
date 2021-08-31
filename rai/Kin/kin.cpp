@@ -127,9 +127,11 @@ Configuration::Configuration() {
 
 Configuration::~Configuration() {
   //delete OpenGL and the extensions first!
-  self->viewer.reset();
-  self->swift.reset();
-  self->fcl.reset();
+  if (self){
+    self->viewer.reset();
+    self->swift.reset();
+    self->fcl.reset();
+  }
   clear();
   self.reset();
 }
@@ -1791,7 +1793,9 @@ std::shared_ptr<FclInterface> Configuration::fcl() {
 }
 
 void Configuration::swiftDelete() {
-  self->swift.reset();
+  if(self){
+    self->swift.reset();
+  }
 }
 
 /// return a PhysX extension
