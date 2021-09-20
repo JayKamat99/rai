@@ -2056,9 +2056,22 @@ bool KOMO::displayPath(const char* txt, bool watch, bool full) {
     return !(key==27 || key=='q');
   }
   gl->update(txt, true);
+  addSnapshotToVideo();
 //  gl.reset();
   gl->clear();
   return true;
+}
+
+void KOMO::addSnapshotToVideo(){
+  static int t = 0;
+  std::string saveToPath = std::string("SimulationMovie/");
+  const char* saveVideoPath = saveToPath.c_str();
+  if(t==0) {
+    rai::system(STRING("mkdir -p " <<saveVideoPath));
+    rai::system(STRING("rm -f " <<saveVideoPath <<"*.ppm"));
+  }
+  write_ppm(gl->captureImage, STRING(saveVideoPath<<std::setw(4)<<std::setfill('0')<<t<<".ppm"));
+  t++;
 }
 
 Camera& KOMO::displayCamera() {

@@ -256,9 +256,11 @@ void rai::ConfigurationViewer::glDraw(OpenGL& gl) {
 
   //draw frame paths
   if(drawFrameLines) {
-    glColor(0., 0., 0., .2);
+    // glColor(0., 0., 0., .2);
+    glColor(0.2, 0.2, 1.0, 1.0);
     glLoadIdentity();
-    for(uint i=0; i<framePath.d1; i++) {
+    // for(uint i=0; i<framePath.d1; i++) {
+    for(uint i : {framePath.d1-12,framePath.d1-8,framePath.d1-4}) {
       glBegin(GL_LINE_STRIP);
       for(uint t=0; t<framePath.d0; t++) {
         T.set(&framePath(t, i, 0));

@@ -308,6 +308,7 @@ struct KOMO : NonCopyable {
   bool displayTrajectory(double delay=1., bool watch=true, bool overlayPaths=true, const char* saveVideoPath=nullptr, const char* addText=nullptr); ///< display the trajectory; use "vid/z." as vid prefix
   bool displayPath(const char* txt, bool watch=true, bool full=true); ///< display the trajectory; use "vid/z." as vid prefix
   rai::Camera& displayCamera();   ///< access to the display camera to change the view
+  void addSnapshotToVideo(); ///< To make a common place for all snapshots to be added  such that we can make a video later.
 
   //===========================================================================
   //
